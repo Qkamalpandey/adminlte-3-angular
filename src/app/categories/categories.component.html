@@ -1,0 +1,73 @@
+<section class="content-header">
+    <div class="container-fluid">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h3>Categories</h3>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Categories</li>
+    </ol>
+    </div>
+    </div>
+    </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+        <div class="row">
+        
+        <div class="col-md-6">
+        <div class="card card-outline card-primary">
+        <div class="card-header">
+        <h3 class="card-title"><i class="fa fa-plus-circle"></i> Add Categories</h3>
+        </div>
+        
+        
+        <form class="form-horizontal"   (ngSubmit)="OnSave()">
+        <div class="card-body">
+        <div class="form-group row">
+        <label for="Type" class="col-sm-2 col-form-label">Categories</label>
+        <div class="col-sm-10">
+         
+        <input type="text"  formControlName="Type" class="form-control" id="Type" placeholder="Categories">
+        </div>
+        </div>
+        <div class="form-group row">
+        <label for="ProductTypeDescription" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <textarea   formControlName="ProductTypeDescription"  class="form-control" id="ProductTypeDescription" placeholder="Description">
+            </textarea>
+        </div>
+        </div>
+        
+        </div>
+        
+        <div class="card-footer">
+        <button type="submit" class="btn btn-outline-primary btn-sm">Save</button>
+        <button type="reset" class="btn btn-outline-dark float-right btn-sm">Reset</button>
+        </div>
+        
+        </form>
+        </div>
+        </div>
+        <div class="col-md-6">
+            <div *ngIf="isgrid" class="card card-outline card-primary">
+            <div class="card-header">
+            <h3 class="card-title"><i class="fa fa-list"></i> Categories</h3>
+            </div>
+            
+              
+             <div>
+              
+                <!-- <mat-paginator
+                #paginator [length]="noOfRecord"
+                             aria-label="Select page"
+                             [pageSize]="5"
+                 aria-label="Select page of Categories"></mat-paginator> -->
+            </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </section>

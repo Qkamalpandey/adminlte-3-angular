@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
-
+import { FormsModule }   from '@angular/forms';
 import {AppRoutingModule} from '@/app-routing.module';
 import {AppComponent} from './app.component';
 import {MainComponent} from '@modules/main/main.component';
@@ -19,6 +19,14 @@ import {ToastrModule} from 'ngx-toastr';
 import {MessagesComponent} from '@modules/main/header/messages/messages.component';
 import {NotificationsComponent} from '@modules/main/header/notifications/notifications.component';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { MatTableModule } from '@angular/material/table';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
 import {CommonModule, registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import {UserComponent} from '@modules/main/header/user/user.component';
@@ -46,11 +54,13 @@ import {ContentHeaderComponent} from './components/content-header/content-header
 import {LoadingComponent} from './components/loading/loading.component';
 import {OverlayLoadingComponent} from './components/overlay-loading/overlay-loading.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
     declarations: [
+        
         AppComponent,
         MainComponent,
         LoginComponent,
@@ -80,17 +90,27 @@ registerLocaleData(localeEn, 'en-EN');
         SmallBoxComponent,
         ContentHeaderComponent,
         LoadingComponent,
-        OverlayLoadingComponent
+        OverlayLoadingComponent,
+        
     ],
     bootstrap: [AppComponent],
     imports: [
         ProfabricComponentsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        CdkTableModule,
+        MatButtonModule,
+       MatFormFieldModule,
+       MatInputModule,
+       MatRippleModule,
         CommonModule,
         BrowserModule,
         StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
         AppRoutingModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
+        FormsModule,
+      
         ToastrModule.forRoot({
             timeOut: 3000,
             positionClass: 'toast-top-right',
@@ -99,6 +119,7 @@ registerLocaleData(localeEn, 'en-EN');
         NgxGoogleAnalyticsModule.forRoot(environment.GA_ID),
         FontAwesomeModule
     ],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], // Use as a last resort
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()]
 })
 export class AppModule {}

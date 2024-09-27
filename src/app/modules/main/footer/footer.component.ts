@@ -9,6 +9,6 @@ import packageInfo from './../../../../../package.json';
 })
 export class FooterComponent {
     @HostBinding('class') classes: string = 'main-footer';
-    public appVersion = packageInfo.version;
+    public appVersion ='0.1'; //packageInfo.version;
     public currentYear: string = DateTime.now().toFormat('y');
 }

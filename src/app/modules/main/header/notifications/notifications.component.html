@@ -1,32 +1,28 @@
-<pf-dropdown [hideArrow]="true">
-    <div slot="head">
+<pf-dropdown hide-arrow>
+    <div slot="button" *ngIf="IsNotification">
         <a class="nav-link">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
+            <div>
+            <span class="badge badge-warning navbar-badge">{{totalNotification}}</span>
+          </div>
         </a>
     </div>
-    <div slot="body">
-        <span class="dropdown-item dropdown-header">15 Notifications</span>
-        <div class="dropdown-divider"></div>
-
-        <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-        </a>
+    <div slot="menu">
+        <span class="dropdown-item dropdown-header">{{totalNotification}} Notifications <button [(ngModel)]="MarkRead" class="btn btn-outline-primary btn-sm float-sm-right" title="Mark All As Read" (click)="MarkAsRead(true);">
+            <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+        </span>
+        <div *ngIf="!MarkRead">
+        <div *ngFor="let item of notificationList">
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
+            <i class="fas fa-envelope mr-2"></i> {{ModuleName}} Name({{item.className}}) {{item.affectedEvent}}
+            <span class="float-right text-muted text-sm"><i class="fa fa-history"></i>{{item.timeSpan}}</span>
         </a>
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-        </a>
-        <div class="dropdown-divider"></div>
+        </div>
         <a href="#" class="dropdown-item dropdown-footer"
-            >See All Notifications</a
-        >
+            >See All Notifications</a>
+            </div>
     </div>
 </pf-dropdown>
 

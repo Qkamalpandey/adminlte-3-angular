@@ -1,6 +1,7 @@
 <div class="card card-outline card-primary">
     <div class="card-header text-center">
-        <a [routerLink]="['/']" class="h1"><b>Admin</b>LTE</a>
+        <a [routerLink]="['/']" class="h1">
+            <img src="../assets/img/logo.png" height="50"> <b>&#64;EDU</b>ERP</a>
     </div>
     <div class="card-body">
         <p class="login-box-msg">Register a new membership</p>
@@ -8,10 +9,11 @@
         <form [formGroup]="registerForm" (ngSubmit)="registerByAuth()">
             <div class="input-group mb-3">
                 <input
-                    formControlName="email"
-                    type="email"
+                    formControlName="ClientUserName"
+                    [(ngModel)]="ClientUserName"
+                    type="text"
                     class="form-control"
-                    placeholder="Email"
+                    placeholder="User Name"
                 />
                 <div class="input-group-append">
                     <div class="input-group-text">
@@ -21,7 +23,8 @@
             </div>
             <div class="input-group mb-3">
                 <input
-                    formControlName="password"
+                    formControlName="ClientPassword"
+                    [(ngModel)]="ClientPassword"
                     type="password"
                     class="form-control"
                     placeholder="Password"
@@ -35,6 +38,8 @@
             <div class="input-group mb-3">
                 <input
                     formControlName="retypePassword"
+                     [(ngModel)]="retypePassword" 
+                     (input)="ngOnValidatePassword()"
                     type="password"
                     class="form-control"
                     placeholder="Retype password"
@@ -60,38 +65,42 @@
                     </div>
                 </div>
                 <!-- /.col -->
-                <div class="col-5">
+                <!-- <div class="col-5" *ngIf="IsPasswordMatched">
                     <pf-button
+                        [type]="'submit'"
+                        [block]="true"
                         [loading]="isAuthLoading"
                         [disabled]="isFacebookLoading || isGoogleLoading"
-                        (click)="registerByAuth()"
                     >
                         Register
                     </pf-button>
-                </div>
+                </div> -->
                 <!-- /.col -->
             </div>
         </form>
 
-        <div class="social-auth-links text-center">
+        <!-- <div class="social-auth-links text-center">
             <pf-button
                 class="mb-2"
+                [block]="true"
                 [loading]="isFacebookLoading"
-                [disabled]="true || isAuthLoading || isGoogleLoading"
+                [disabled]="isAuthLoading || isGoogleLoading"
+                (click)="registerByFacebook()"
             >
                 <i class="fab fa-facebook mr-2"></i>
                 Sign up using Facebook
             </pf-button>
             <pf-button
+                [block]="true"
                 [loading]="isGoogleLoading"
                 [disabled]="isAuthLoading || isFacebookLoading"
                 (click)="registerByGoogle()"
-                variant="danger"
+                theme="danger"
             >
                 <i class="fab fa-google mr-2"></i>
                 Sign up using Google+
             </pf-button>
-        </div>
+        </div> -->
 
         <a [routerLink]="['/login']" class="text-center">
             I already have a membership</a

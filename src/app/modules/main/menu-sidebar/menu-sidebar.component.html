@@ -4,33 +4,32 @@
         src="assets/img/logo.png"
         alt="AdminLTE Logo"
         class="brand-image"
-        height="32"
-        width="32"
-        rounded="true"
+        height="33"
+        width="33"
+        rounded
         style="opacity: 0.8"
     ></pf-image>
-    <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <span class="brand-text font-weight-light">&#64;EDU ERP</span>
 </a>
 
 <!-- Sidebar -->
 <div class="sidebar">
     <!-- Sidebar user (optional) -->
-    <div
-        class="user-panel mt-3 pb-2 d-flex"
-        style="justify-content: start; align-items: center"
-    >
-        <pf-image
-            [src]="user.photoURL"
-            fallbackSrc="assets/img/default-profile.png"
-            style="margin-left: 12px"
-            alt="User Image"
-            width="34"
-            height="34"
-            rounded="true"
-        />
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <pf-image
+                [src]="user.picture"
+                fallback-src="assets/img/default-profile.png"
+                class="img-circle"
+                alt="User Image"
+                width="34"
+                height="34"
+                rounded
+            ></pf-image>
+        </div>
         <div class="info">
             <a [routerLink]="['/profile']" class="d-block">
-                {{ user.email }}
+                {{ user }}
             </a>
         </div>
     </div>
@@ -47,7 +46,10 @@
             role="menu"
             data-accordion="false"
         >
-            <app-menu-item *ngFor="let item of menu" [menuItem]="item" />
+            <app-menu-item
+                *ngFor="let item of menu"
+                [menuItem]="item"
+            ></app-menu-item>
         </ul>
     </nav>
 </div>

@@ -1,6 +1,7 @@
 <div class="card card-outline card-primary">
     <div class="card-header text-center">
-        <a [routerLink]="['/']" class="h1"><b>Admin</b>LTE</a>
+        <a [routerLink]="['/']" class="h1">
+             <img src="../assets/img/logo.png" height="50"> <b>&#64;EDU</b>ERP</a>
     </div>
     <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -8,8 +9,8 @@
         <form [formGroup]="loginForm" (ngSubmit)="loginByAuth()">
             <div class="input-group mb-3">
                 <input
-                    formControlName="email"
-                    type="email"
+                    formControlName="UserName"
+                    type="text"
                     class="form-control"
                     placeholder="Email"
                 />
@@ -21,7 +22,7 @@
             </div>
             <div class="input-group mb-3">
                 <input
-                    formControlName="password"
+                    formControlName="Password"
                     type="password"
                     class="form-control"
                     placeholder="Password"
@@ -39,41 +40,18 @@
                         <label for="remember"> Remember Me </label>
                     </div>
                 </div>
-                <!-- /.col -->
+                <!-- /.col  [type]="'submit'" -->
                 <div class="col-5">
-                    <pf-button
-                        [variant]="'primary'"
-                        [loading]="isAuthLoading"
-                        [disabled]="isFacebookLoading || isGoogleLoading"
-                        (click)="loginByAuth()"
-                    >
+                    <button class="btn btn-primary"
+                    type="submit">
                         Sign In
-                    </pf-button>
+                </button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <div class="social-auth-links text-center mb-3">
-            <pf-button
-                class="mb-2"
-                [variant]="'primary'"
-                [loading]="isFacebookLoading"
-                [disabled]="true || isAuthLoading || isGoogleLoading"
-            >
-                <i class="fab fa-facebook mr-2"></i>
-                Sign in using Facebook
-            </pf-button>
-            <pf-button
-                [variant]="'danger'"
-                [loading]="isGoogleLoading"
-                [disabled]="isAuthLoading || isFacebookLoading"
-                (click)="loginByGoogle()"
-            >
-                <i class="fab fa-google mr-2"></i>
-                Sign in using Google+
-            </pf-button>
-        </div>
+        
 
         <p class="mb-1">
             <a [routerLink]="['/forgot-password']">I forgot my password</a>

@@ -8,6 +8,8 @@ import {
 import {UntypedFormGroup, UntypedFormControl, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {AppService} from '@services/app.service';
+import { first } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -24,7 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     constructor(
         private renderer: Renderer2,
         private toastr: ToastrService,
-        private appService: AppService
+        private appService: AppService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -33,30 +36,42 @@ export class LoginComponent implements OnInit, OnDestroy {
             'login-page'
         );
         this.loginForm = new UntypedFormGroup({
-            email: new UntypedFormControl(null, Validators.required),
-            password: new UntypedFormControl(null, Validators.required)
+            UserName: new UntypedFormControl(null, Validators.required),
+            Password: new UntypedFormControl(null, Validators.required)
         });
     }
 
     async loginByAuth() {
+        debugger
         if (this.loginForm.valid) {
             this.isAuthLoading = true;
-            await this.appService.loginWithEmail(
-                this.loginForm.value.email,
-                this.loginForm.value.password
-            );
-
+            (await this.appService.loginpost('api/Authentication/Auth', this.loginForm.value)).pipe(first()).subscribe(
+                data => {
+                  
+                  if (data!=null && data!=undefined) {
+                   localStorage.setItem("jwtToken", data["token"]);
+                   localStorage.setItem("UserName", data["userName"]);
+                   localStorage.setItem("UserType", data["userType"]);
+                   localStorage.setItem("User_ID", data["user_ID"]);
+                   localStorage.setItem("AppId", data["appId"]);
+                   localStorage.setItem("expiration", data["expiration"]);
+                   //console.log(data)
+                   this.router.navigate(['/dashboard']);
+                  }
+                  
+                },
+                error => {
+                  window.scroll(0, 0);
+                  this.toastr.error(error.message,"Server Down!");
+                }
+              );
             this.isAuthLoading = false;
         } else {
-            this.toastr.error('Form is not valid!');
+            this.toastr.error('Form is not valid!',"Error:");
         }
     }
 
-    async loginByGoogle() {
-        this.isGoogleLoading = true;
-        await this.appService.signInByGoogle();
-        this.isGoogleLoading = false;
-    }
+  
 
     ngOnDestroy() {
         this.renderer.removeClass(

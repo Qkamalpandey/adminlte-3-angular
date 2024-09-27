@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        return this.getProfile();
+        return true
     }
 
     canActivateChild(
@@ -38,7 +38,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        return this.canActivate(next, state);
+        return true; //this.canActivate(next, state);
     }
 
     async getProfile() {

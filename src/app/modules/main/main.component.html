@@ -1,19 +1,17 @@
-<app-header *ngIf="appLoaded"></app-header>
+<app-header></app-header>
+<!-- <div class="spinner-border float-right" style="width: 2rem; height: 2rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div> -->
+  <div *ngIf="IsLoading" [(ngModel)]="IsLoading" class="spinner-grow float-right" style="width: 2rem; height: 2rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+<app-menu-sidebar class="sidebar-dark-primary"></app-menu-sidebar>
 
-<app-menu-sidebar
-    *ngIf="appLoaded"
-    class="sidebar-dark-primary"
-></app-menu-sidebar>
-
-<div *ngIf="appLoaded" class="content-wrapper">
+<div class="content-wrapper">
+    
     <router-outlet></router-outlet>
 </div>
 
-<app-footer *ngIf="appLoaded"></app-footer>
-<app-control-sidebar *ngIf="appLoaded"></app-control-sidebar>
-<div
-    id="sidebar-overlay"
-    *ngIf="appLoaded"
-    (click)="onToggleMenuSidebar()"
-></div>
-<app-loading *ngIf="!appLoaded"></app-loading>
+<app-footer></app-footer>
+<app-control-sidebar></app-control-sidebar>
+<div id="sidebar-overlay" (click)="onToggleMenuSidebar()"></div>

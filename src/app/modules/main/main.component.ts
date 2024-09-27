@@ -1,32 +1,25 @@
 import {AppState} from '@/store/state';
 import {ToggleSidebarMenu} from '@/store/ui/actions';
 import {UiState} from '@/store/ui/state';
-import {
-    AfterViewInit,
-    Component,
-    HostBinding,
-    OnInit,
-    Renderer2
-} from '@angular/core';
+import {Component, HostBinding, OnInit, Renderer2} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-
+interface Global {
+     IsLoading:boolean;
+   }
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, AfterViewInit {
+export class MainComponent implements OnInit {
     @HostBinding('class') class = 'wrapper';
     public ui: Observable<UiState>;
-    public appLoaded: boolean = false;
-
-    constructor(
-        private renderer: Renderer2,
-        private store: Store<AppState>
-    ) {}
+    public IsLoading:boolean=false;
+    constructor(private renderer: Renderer2, private store: Store<AppState>) {}
 
     ngOnInit() {
+        this.IsLoading=false;
         this.ui = this.store.select('ui');
         this.renderer.removeClass(
             document.querySelector('app-root'),
@@ -92,9 +85,5 @@ export class MainComponent implements OnInit, AfterViewInit {
 
     onToggleMenuSidebar() {
         this.store.dispatch(new ToggleSidebarMenu());
-    }
-
-    ngAfterViewInit() {
-        this.appLoaded = true;
     }
 }

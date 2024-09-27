@@ -1,55 +1,39 @@
-<pf-dropdown [hideArrow]="true" class="user-menu">
-    <div slot="head">
+<pf-dropdown hide-arrow class="user-menu">
+    <div slot="button">
         <a class="nav-link">
             <pf-image
-                [src]="user.photoURL"
-                fallbackSrc="assets/img/default-profile.png"
+                [src]="user.picture"
+                fallback-src="assets/img/default-profile.png"
                 class="user-image-small"
                 width="25"
                 height="25"
                 alt="User Image"
-                rounded="true"
-            />
+                rounded
+            ></pf-image>
         </a>
     </div>
-    <div slot="body">
+    <div slot="menu">
         <li class="user-header bg-primary">
             <pf-image
-                [src]="user.photoURL"
-                fallbackSrc="assets/img/default-profile.png"
+                [src]="user.picture"
+                fallback-src="assets/img/default-profile.png"
                 class="user-image-big"
                 alt="User Image"
                 width="90"
                 height="90"
-                rounded="true"
-            />
+                rounded
+            ></pf-image>
 
             <p>
-                {{ user?.email }}
-                <small>
-                    <span>Member since </span>
-
-                    <span *ngIf="user?.metadata?.creationTime">
-                        {{ formatDate(user?.metadata?.creationTime) }}
-                    </span>
-                </small>
+                <span>{{ user }}</span>
+                <!-- <small>
+                    <span class="mr-2">Member since</span>
+                    <span>{{ date }}</span>
+                </small> -->
             </p>
         </li>
         <!-- Menu Body -->
-        <li class="user-body">
-            <div class="row">
-                <div class="col-4 text-center">
-                    <a [routerLink]="['/']">Followers</a>
-                </div>
-                <div class="col-4 text-center">
-                    <a [routerLink]="['/']">Sales</a>
-                </div>
-                <div class="col-4 text-center">
-                    <a [routerLink]="['/']">Friends</a>
-                </div>
-            </div>
-            <!-- /.row -->
-        </li>
+       
         <!-- Menu Footer-->
         <li class="user-footer">
             <a [routerLink]="['/profile']" class="btn btn-default btn-flat">

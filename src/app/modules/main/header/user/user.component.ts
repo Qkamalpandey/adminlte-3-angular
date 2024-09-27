@@ -9,11 +9,13 @@ import {DateTime} from 'luxon';
 })
 export class UserComponent implements OnInit {
     public user;
-
+    public date;
     constructor(private appService: AppService) {}
 
     ngOnInit(): void {
-        this.user = this.appService.user;
+        
+        this.user = localStorage.getItem('UserName');
+        this.date=this.formatDate(Date);
     }
 
     logout() {
@@ -21,6 +23,6 @@ export class UserComponent implements OnInit {
     }
 
     formatDate(date) {
-        return DateTime.fromRFC2822(date).toFormat('dd LLL yyyy');
+        return DateTime.fromISO(date).toFormat('dd LLL yyyy');
     }
 }
